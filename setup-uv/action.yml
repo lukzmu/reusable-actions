@@ -1,0 +1,22 @@
+name: "Setup uv environment"
+description: "Sets up Python environments using uv"
+
+inputs:
+  python-version:
+    description: "Python version used by your project"
+    default: "3.13"
+  main-module:
+    description: "Main python module of your python project"
+    default: "src"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-python@v6
+      with:
+        python-version: ${{ inputs.python-version }}
+    - name: "Install uv"
+      run: pip install uv
+      shell: bash
+    - name: "Setup PYTHONPATH"
+      run: echo "PYTHONPATH=$GITHUB_WORKSPACE/${{ inputs.main-module }}" >> $GITHUB_ENV
