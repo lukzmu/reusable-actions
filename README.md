@@ -16,6 +16,8 @@ steps:
 
 ## Available actions:
 
-- [setup-python](setup-python/action.yml) - sets up some handy things to use the uv package manager,
-- [code-quality](code-quality/action.yml) - check ruff, mypy, tests and publish coverage reports,
-- [pelican-publish](pelican-publish/action.yml) - publish pelican site to GitHub Pages.
+| **Action**                                    | **Description**                                         |
+|-----------------------------------------------|---------------------------------------------------------|
+| [setup-python](setup-python/action.yml)       | Sets up some handy things to use the uv package manager |
+| [code-quality](code-quality/action.yml)       | Check ruff, mypy, tests and publish coverage reports    |
+| [pelican-publish](pelican-publish/action.yml) | Publish pelican site to GitHub Pages                    |
