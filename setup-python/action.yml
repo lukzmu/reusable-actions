@@ -20,3 +20,4 @@ runs:
       shell: bash
     - name: "Setup PYTHONPATH"
       run: echo "PYTHONPATH=$GITHUB_WORKSPACE/${{ inputs.main-module }}" >> $GITHUB_ENV
+      shell: bash
