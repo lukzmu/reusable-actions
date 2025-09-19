@@ -8,6 +8,9 @@ inputs:
   main-module:
     description: "Main python module of your python project"
     default: "src"
+  codecov-token:
+    description: "Codecov upload token"
+    default: ""
 
 runs:
   using: "composite"
@@ -26,6 +29,6 @@ runs:
       run: uv run pytest --cov=${{ inputs.main-module }} --cov-report=json --cov-report=term
       shell: bash
     - uses: codecov/codecov-action@v5
-      if: ${{ inputs.skip-tests == 'false' && env.CODECOV_TOKEN != '' }}
+      if: ${{ inputs.skip-tests == 'false' && inputs.codecov-token != '' }}
       env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        CODECOV_TOKEN: ${{ inputs.codecov-token }}
