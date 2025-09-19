@@ -11,12 +11,12 @@ inputs:
     description: "Path to output site build"
     default: "~/public"
 
-  runs:
-    using: "composite"
-    steps:
-      - name: "Build Pelican website"
-        run: uv run pelican ${{ inputs.content }} -s ${{ inputs.settings }} -o ${{ inputs.output }}
-        shell: bash
-      - uses: JamesIves/github-pages-deploy-action@v4.7.3
-        with:
-          folder: ${{ inputs.output }}
+runs:
+  using: "composite"
+  steps:
+    - name: "Build Pelican website"
+      run: uv run pelican ${{ inputs.content }} -s ${{ inputs.settings }} -o ${{ inputs.output }}
+      shell: bash
+    - uses: JamesIves/github-pages-deploy-action@v4.7.3
+      with:
+        folder: ${{ inputs.output }}
