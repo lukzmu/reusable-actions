@@ -4,11 +4,11 @@ This repository holds a set of reusable actions for my Python projects. It is li
 
 ## How to use?
 
-You want to select a specific action in your workflow. Be sure to see the `name` and the `version` you are interested in. Versions are defined by **tags**. So for example, to run the first release of the `setup-uv` action, you should do the following:
+You want to select a specific action in your workflow. Be sure to see the `name` and the `version` you are interested in. Versions are defined by **tags**. So for example, to run the first release of the `setup-python` action, you should do the following:
 
 ```
 steps:
-    - uses: lukzmu/reusable-actions/setup-uv@v1
+    - uses: lukzmu/reusable-actions/setup-python@v1
       with:
         python-version: "3.14"
         main-module: "my_source_module"
@@ -16,4 +16,4 @@ steps:
 
 ## Available actions:
 
-- [setup-uv](setup-uv) - sets up some handy things to use the uv package manager
+- [setup-python](setup-python/action.yml) - sets up some handy things to use the uv package manager
