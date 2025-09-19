@@ -1,0 +1,22 @@
+name: "Publish Pelican site to GitHub Pages"
+
+inputs:
+  content:
+    description: "Path to pelican site content"
+    required: true
+  settings:
+    description: "Path to pelican site settings"
+    required: true
+  output:
+    description: "Path to output site build"
+    default: "~/public"
+
+  runs:
+    using: "composite"
+    steps:
+      - name: "Build Pelican website"
+        run: uv run pelican ${{ inputs.content }} -s ${{ inputs.settings }} -o ${{ inputs.output }}
+        shell: bash
+      - using: JamesIves/github-pages-deploy-action@v4.7.3
+        with:
+          folder: ${{ inputs.output }}
