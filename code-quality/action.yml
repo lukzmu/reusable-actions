@@ -25,12 +25,12 @@ runs:
       run: uv run mypy ${{ inputs.main-module }}
       shell: bash
     - name: "Test using pytest"
-      if: ${{ inputs.skip-tests == 'false' }}
+      if: ${{ !inputs.skip-tests }}
       run: uv run pytest --cov=${{ inputs.main-module }} --cov-report=json --cov-report=term
       env:
         PYTHONPATH: .
       shell: bash
     - uses: codecov/codecov-action@v5
-      if: ${{ inputs.skip-tests == 'false' && inputs.codecov-token != '' }}
+      if: ${{ !inputs.skip-tests && inputs.codecov-token != '' }}
       env:
         CODECOV_TOKEN: ${{ inputs.codecov-token }}
