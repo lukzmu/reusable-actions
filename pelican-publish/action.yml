@@ -17,6 +17,6 @@ inputs:
       - name: "Build Pelican website"
         run: uv run pelican ${{ inputs.content }} -s ${{ inputs.settings }} -o ${{ inputs.output }}
         shell: bash
-      - using: JamesIves/github-pages-deploy-action@v4.7.3
+      - uses: JamesIves/github-pages-deploy-action@v4.7.3
         with:
           folder: ${{ inputs.output }}
