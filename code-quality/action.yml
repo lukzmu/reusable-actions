@@ -1,0 +1,31 @@
+name: "Lint, test and coverage of Python code"
+
+inputs:
+  skip-tests:
+    description: "Flag that indicates whether tests should be skipped"
+    default: false
+    type: boolean
+  main-module:
+    description: "Main python module of your python project"
+    default: "src"
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Ruff lint check"
+      run: uv run ruff check ${{ inputs.main-module }}
+      shell: bash
+    - name: "Ruff format check"
+      run: uv run ruff format ${{ inputs.main-module }} --check
+      shell: bash
+    - name: "Mypy check"
+      run: uv run mypy ${{ inputs.main-module }}
+      shell: bash
+    - name: "Test using pytest"
+      if: ${{ inputs.skip-tests == 'false' }}
+      run: uv run pytest --cov=${{ inputs.main-module }} --cov-report=json --cov-report=term
+      shell: bash
+    - uses: codecov/codecov-action@v5
+      if: ${{ inputs.skip-tests == 'false' && env.CODECOV_TOKEN != '' }}
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
