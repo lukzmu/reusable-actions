@@ -4,6 +4,9 @@ inputs:
   skip-tests:
     description: "Flag that indicates whether tests should be skipped"
     default: "false"
+  project-directory:
+    description: "Directory of the python project"
+    default: "."
   main-module:
     description: "Main python module of your python project"
     default: "src"
@@ -17,19 +20,25 @@ runs:
     - name: "Ruff lint check"
       run: uv run ruff check ${{ inputs.main-module }}
       shell: bash
+      working-directory: ${{ inputs.project-directory }}
     - name: "Ruff format check"
       run: uv run ruff format ${{ inputs.main-module }} --check
       shell: bash
+      working-directory: ${{ inputs.project-directory }}
     - name: "Mypy check"
       run: uv run mypy ${{ inputs.main-module }}
       shell: bash
+      working-directory: ${{ inputs.project-directory }}
     - name: "Test using pytest"
       if: ${{ inputs.skip-tests != 'true' }}
       run: uv run pytest --cov=${{ inputs.main-module }} --cov-report=json --cov-report=term
       env:
         PYTHONPATH: .
       shell: bash
+      working-directory: ${{ inputs.project-directory }}
     - uses: codecov/codecov-action@v5
       if: ${{ inputs.skip-tests != 'true' && inputs.codecov-token != '' }}
       env:
         CODECOV_TOKEN: ${{ inputs.codecov-token }}
+      with:
+        working-directory: ${{ inputs.project-directory }}
