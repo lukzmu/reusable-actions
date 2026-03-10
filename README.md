@@ -1,6 +1,6 @@
 # Reusable Actions
 
-This repository holds a set of reusable actions for my Python projects. It is licensed under the [MIT License](LICENSE), so feel free to do whatever you want with it. Any issues you encounter... that is a *"you problem"*.
+This repository holds a set of reusable actions for my Python projects. It is licensed under the [WTFPL license](LICENSE), so feel free to do whatever you want with it. Any issues you encounter... that is a *"you problem"*.
 
 ## How to use?
 
@@ -8,10 +8,19 @@ You want to select a specific action in your workflow. Be sure to see the `name`
 
 ```
 steps:
-    - uses: lukzmu/reusable-actions/setup-python@v1
+    - uses: lukzmu/reusable-actions/setup-python@v3
       with:
         python-version: "3.14"
-        main-module: "my_source_module"
+```
+
+🌟 Now `code-quality` also supports monorepository setup:
+
+```
+steps:
+    - uses: lukzmu/reusable-actions/code-quality@v3
+      with:
+        project-directory: your/monorepo/path
+        main-module: module_name
 ```
 
 ## Available actions:
